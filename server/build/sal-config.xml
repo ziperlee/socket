@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+ 
+  <server_params>
+    <server_ip>10.10.10.183</server_ip>
+    <server_port>6666</server_port>
+    <if_local_test>true</if_local_test>
+    <mix_listen_num>100</mix_listen_num>
+  </server_params>
+
+</root>

@@ -1,0 +1,46 @@
+<log4j:configuration  xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <appender name="console" class="ConsoleAppender"> 
+    <param name="Target" value="System.out"/>
+    <layout class="DefaultLayout"> 
+    </layout> 
+  </appender> 
+
+  <appender name="file" class="FileAppender"> 
+    <param name="File" value="./xcommlog.log"/>
+    <param name="flush_immediately" value="true"/>
+    <layout class="DefaultLayout"/>
+  </appender> 
+
+  <appender name="rollingfile" class="RollingFileAppender"> 
+    <param name="File" value="./xcommlog.log"/>
+    <param name="flush_immediately" value="true"/>
+    <param name="Maxfilesize" value="1000KB"/>
+    <param name="maxbackupindex" value="1400"/>
+    <layout class="DefaultLayout"/>
+  </appender> 
+
+  <appender name="dailyrollingfile" class="DailyRollingFileAppender">
+    <param name="File" value="./xcommlog.log"/>
+    <param name="flush_immediately" value="true"/>
+    <param name="Maxfilesize" value="1000KB"/>
+    <param name="maxbackupindex" value="1400"/>
+    <param name="datepattern" value="yyyy-MM-dd"/>
+    <param name="intervalmin" value="1"/>
+    <layout class="DefaultLayout"/>
+  </appender>
+
+  <root>
+    <priority value ="trace" />
+    <appender-ref ref="console" />
+    appender-ref ref="file" 
+    appender-ref ref="rollingfile"
+    <appender-ref ref="dailyrollingfile" />
+  </root>
+
+  <logger name = "console_logger">
+    <level value = "trace"/>
+    <appender-ref ref="console" />
+  </logger>
+
+</log4j:configuration>
