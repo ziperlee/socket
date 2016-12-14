@@ -2,9 +2,17 @@
 	1、配置读取框架
 	2、日志输出框架
 
+#include<sys/socket.h>
+#include<sys/types.h>
+
+常见错误：
+1、(m_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1
+  m_sockfd外括号没加，导致m_sockfd为0
+2、服务器监听端口必须和客户端请求连接端口一致
+
 1.  socket
 
-int socket(int domain,int type, int protocol)
+int socket(int domain, int type, int protocol)
 
 _________________________返回值：非负描述符 – 成功，-1 - 出错
 
@@ -43,7 +51,7 @@ sa_data是14字节协议地址。
 
 sockaddr 是通用的socket地址,具体到Internet   socket，用下面的结构，二者可以进行类型转换  
 
-b、sockaddr_in （在头文件 /usr/include/netinet/in.h 中定义）
+b、sockaddr_in （在头文件 <netinet/in.h> 中定义）
   struct   sockaddr_in   {  
                 short int sin_family;     
                 		// Address family 一般来说AF_INET（地址族）PF_INET（协议族 ）
@@ -162,3 +170,21 @@ len：指定的用于接收数据的缓冲区长度；
 flags：一般指定为0
 
 表示从接收缓冲区拷贝数据。成功时，返回拷贝的字节数，失败返回-1。阻塞模式下，recv/recvfrom将会阻塞到缓冲区里至少有一个字节(TCP)/至少有一个完整的UDP数据报才返回，没有数据时处于休眠状态。若非阻塞，则立即返回，有数据则返回拷贝的数据大小，否则返回错误-1，置错误码为EWOULDBLOCK。       
+
+8、connect
+
+int connect(int sockfd, struct sockaddr * serv_addr, int addrlen);
+
+函数说明：connect()用来将参数sockfd 的socket 连至参数serv_addr 指定的网络地址. 结构sockaddr请参考bind(). 参数addrlen 为sockaddr 的结构长度.
+
+返回值：成功则返回0, 失败返回-1, 错误原因存于errno 中.
+
+错误代码：
+1、EBADF 参数sockfd 非合法socket 处理代码
+2、EFAULT 参数serv_addr 指针指向无法存取的内存空间
+3、ENOTSOCK 参数sockfd 为一文件描述词, 非socket.
+4、EISCONN 参数sockfd 的socket 已是连线状态
+5、ETIMEDOUT 企图连线的操作超过限定时间仍未有响应.
+6、ENETUNREACH 无法传送数据包至指定的主机.
+7、EAFNOSUPPORT sockaddr 结构的sa_family 不正确.
+8、EALREADY socket 为不可阻断且先前的连线操作还未完成.

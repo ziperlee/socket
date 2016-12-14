@@ -10,7 +10,8 @@
 namespace server 
 {
 
-CServer::CServer()
+CServer::CServer():
+	m_sockfd(-1)
 {
 	m_maplinker.clear();
 	m_pServerConfig = NAMESPACE_OD_APP_CFG AppReadConfig<CServerConfig>();
@@ -27,7 +28,10 @@ CServer::CServer()
 		
 CServer::~CServer()
 {
-	close(m_sockfd);
+	if (m_sockfd >= 0)
+	{
+		close(m_sockfd);
+	}
 }
 
 CServer & CServer::get_instance()

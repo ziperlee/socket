@@ -27,7 +27,7 @@ public:
 
 	APP_READ_CONFIG_BEGIN
         APP_READ_VALUE(m_szServerIP, "server_ip", "10.10.10.183", NAMESPACE_OD_APP_CFG emValueOptional);
-        APP_READ_VALUE(m_iServerPort, "server_port", 8888, NAMESPACE_OD_APP_CFG emValueOptional);
+        APP_READ_VALUE(m_iServerPort, "server_port", 6666, NAMESPACE_OD_APP_CFG emValueOptional);
         APP_READ_VALUE(m_bIfLocalTest, "if_local_test", 1, NAMESPACE_OD_APP_CFG emValueOptional);
         APP_READ_VALUE(m_iMixListenNum, "mix_listen_num", 100, NAMESPACE_OD_APP_CFG emValueOptional);
     APP_READ_CONFIG_END
@@ -47,6 +47,11 @@ public:
     APP_READ_CONFIG_END
 };
 
+}//end namespace
+
+namespace client
+{
+
 class CClientParams
 {
 public:
@@ -65,8 +70,8 @@ public:
 
 	APP_READ_CONFIG_BEGIN
         APP_READ_VALUE(m_szClientIP, "client_ip", "10.10.10.183", NAMESPACE_OD_APP_CFG emValueOptional);
-        APP_READ_VALUE(m_iClientPort, "server_port", 8888, NAMESPACE_OD_APP_CFG emValueOptional);
-        APP_READ_VALUE(m_szServerIP, "server_ip", "10.10.10.183", NAMESPACE_OD_APP_CFG emValueOptional);
+        APP_READ_VALUE(m_iClientPort, "client_port", 8888, NAMESPACE_OD_APP_CFG emValueOptional);
+        APP_READ_VALUE(m_szServerIP, "server_ip", "127.0.0.1", NAMESPACE_OD_APP_CFG emValueOptional);
     APP_READ_CONFIG_END	
 	
 };
@@ -87,5 +92,5 @@ public:
 	
 };
 
-} //end
+} //end namespace client
 #endif // __CONFIG_H__

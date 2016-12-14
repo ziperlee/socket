@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+ 
+  <client_params>
+    <server_ip>127.0.0.1</server_ip>
+    <client_port>6666</client_port>
+    <client_ip>127.0.0.1</client_ip>
+  </client_params>
+
+</root>
